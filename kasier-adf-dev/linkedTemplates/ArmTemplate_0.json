@@ -227,7 +227,7 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -241,7 +241,7 @@
 				"typeProperties": {
 					"recurrence": {
 						"frequency": "Minute",
-						"interval": 5,
+						"interval": 15,
 						"startTime": "2025-12-28T23:52:00",
 						"endTime": "2025-12-29T00:17:00",
 						"timeZone": "India Standard Time"
