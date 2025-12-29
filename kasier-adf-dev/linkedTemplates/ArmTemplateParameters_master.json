@@ -35,6 +35,15 @@
 		"tumblinggg_properties_pipeline_parameters_pstartdate": {
 			"value": "@trigger().outputs.windowstarttime"
 		},
+		"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
+			"value": "@triggger().outputs.windowstarttime"
+		},
+		"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
+			"value": "@triggger().outputs.windowEndtime"
+		},
+		"evtn_based_properties_typeProperties_scope": {
+			"value": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
 		"containerUri": {
 			"value": ""
 		},

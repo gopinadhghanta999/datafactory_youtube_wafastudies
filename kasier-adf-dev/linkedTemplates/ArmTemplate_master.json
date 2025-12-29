@@ -47,6 +47,18 @@
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowstarttime"
 		},
+		"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
+			"type": "string",
+			"defaultValue": "@triggger().outputs.windowstarttime"
+		},
+		"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
+			"type": "string",
+			"defaultValue": "@triggger().outputs.windowEndtime"
+		},
+		"evtn_based_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
 		"containerUri": {
 			"type": "string",
 			"metadata": "URI to storage account containing linked ARM templates"
@@ -103,6 +115,15 @@
 					},
 					"tumblinggg_properties_pipeline_parameters_pstartdate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pstartdate')]"
+					},
+					"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
+						"value": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_starttime')]"
+					},
+					"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
+						"value": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_endtime')]"
+					},
+					"evtn_based_properties_typeProperties_scope": {
+						"value": "[parameters('evtn_based_properties_typeProperties_scope')]"
 					}
 				}
 			},
