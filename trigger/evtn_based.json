@@ -8,6 +8,10 @@
 				"pipelineReference": {
 					"referenceName": "tumbling_pipeline1",
 					"type": "PipelineReference"
+				},
+				"parameters": {
+					"starttime": "@triggger().outputs.windowstarttime",
+					"endtime": "@triggger().outputs.windowEndtime"
 				}
 			}
 		],
