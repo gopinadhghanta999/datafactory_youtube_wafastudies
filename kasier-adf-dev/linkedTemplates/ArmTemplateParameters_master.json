@@ -23,6 +23,12 @@
 		"adf_learning_youtube_ls_properties_typeProperties_url": {
 			"value": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
+		"tumblinggg_properties_pipeline_parameters_pendate": {
+			"value": "@trigger().outputs.windowEndtime"
+		},
+		"tumblinggg_properties_pipeline_parameters_pstartdate": {
+			"value": "@trigger().outputs.windowstarttime"
+		},
 		"containerUri": {
 			"value": ""
 		},
