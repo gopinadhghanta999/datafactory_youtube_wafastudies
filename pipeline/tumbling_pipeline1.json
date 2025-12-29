@@ -20,14 +20,6 @@
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": true,
-							"modifiedDatetimeStart": {
-								"value": "@pipeline().parameters.starttime",
-								"type": "Expression"
-							},
-							"modifiedDatetimeEnd": {
-								"value": "@pipeline().parameters.endtime",
-								"type": "Expression"
-							},
 							"wildcardFileName": "*.csv",
 							"enablePartitionDiscovery": false
 						},
@@ -70,10 +62,10 @@
 			}
 		],
 		"parameters": {
-			"starttime": {
+			"folderpath": {
 				"type": "string"
 			},
-			"endtime": {
+			"filename": {
 				"type": "string"
 			}
 		},
