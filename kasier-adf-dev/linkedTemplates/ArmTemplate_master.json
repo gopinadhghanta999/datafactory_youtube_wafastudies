@@ -31,6 +31,14 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowstarttime"
+		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndtime"
+		},
 		"tumblinggg_properties_pipeline_parameters_pendate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndtime"
@@ -83,6 +91,12 @@
 					},
 					"adf_learning_youtube_ls_properties_typeProperties_url": {
 						"value": "[parameters('adf_learning_youtube_ls_properties_typeProperties_url')]"
+					},
+					"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
+						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_starttime')]"
+					},
+					"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
+						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_endtime')]"
 					},
 					"tumblinggg_properties_pipeline_parameters_pendate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pendate')]"

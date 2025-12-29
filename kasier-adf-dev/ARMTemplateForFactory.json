@@ -31,6 +31,14 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowstarttime"
+		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
+			"type": "string",
+			"defaultValue": "@trigger().outputs.windowEndtime"
+		},
 		"tumblinggg_properties_pipeline_parameters_pendate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndtime"
@@ -45,7 +53,7 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"name": "[concat(parameters('factoryName'), '/tumbling_pipeline1')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -68,6 +76,14 @@
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
+									"modifiedDatetimeStart": {
+										"value": "@pipeline().parameters.starttime",
+										"type": "Expression"
+									},
+									"modifiedDatetimeEnd": {
+										"value": "@pipeline().parameters.endtime",
+										"type": "Expression"
+									},
 									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
@@ -114,6 +130,14 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"parameters": {
+					"starttime": {
+						"type": "string"
+					},
+					"endtime": {
+						"type": "string"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
@@ -122,7 +146,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/pipeline2')]",
+			"name": "[concat(parameters('factoryName'), '/tumblings_pipeline2')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -410,7 +434,7 @@
 				"pipelines": [
 					{
 						"pipelineReference": {
-							"referenceName": "pipeline1",
+							"referenceName": "tumbling_pipeline1",
 							"type": "PipelineReference"
 						},
 						"parameters": {}
@@ -428,7 +452,41 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
+				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/tumb_trigger_pl2')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipeline": {
+					"pipelineReference": {
+						"referenceName": "tumbling_pipeline1",
+						"type": "PipelineReference"
+					},
+					"parameters": {
+						"starttime": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_starttime')]",
+						"endtime": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_endtime')]"
+					}
+				},
+				"type": "TumblingWindowTrigger",
+				"typeProperties": {
+					"frequency": "Minute",
+					"interval": 5,
+					"startTime": "2025-12-29T16:52:00Z",
+					"delay": "00:00:00",
+					"maxConcurrency": 50,
+					"retryPolicy": {
+						"intervalInSeconds": 30
+					},
+					"dependsOn": []
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
 			]
 		},
 		{
@@ -440,7 +498,7 @@
 				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "pipeline1",
+						"referenceName": "tumbling_pipeline1",
 						"type": "PipelineReference"
 					},
 					"parameters": {}
@@ -460,7 +518,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline1')]"
+				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
 			]
 		},
 		{
@@ -469,10 +527,10 @@
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
-				"runtimeState": "Started",
+				"runtimeState": "Stopped",
 				"pipeline": {
 					"pipelineReference": {
-						"referenceName": "pipeline2",
+						"referenceName": "tumblings_pipeline2",
 						"type": "PipelineReference"
 					},
 					"parameters": {
@@ -495,7 +553,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/pipeline2')]"
+				"[concat(variables('factoryId'), '/pipelines/tumblings_pipeline2')]"
 			]
 		}
 	]
