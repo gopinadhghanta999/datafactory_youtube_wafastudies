@@ -9,8 +9,8 @@
 				"type": "PipelineReference"
 			},
 			"parameters": {
-				"starttime": "@trigger().outputs.windowstarttime",
-				"endtime": "@trigger().outputs.windowEndtime"
+				"folderpath": "@trigger().outputs.windowstarttime",
+				"filename": "@trigger().outputs.windowEndtime"
 			}
 		},
 		"type": "TumblingWindowTrigger",
