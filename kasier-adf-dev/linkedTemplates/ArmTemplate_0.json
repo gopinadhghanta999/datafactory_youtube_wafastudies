@@ -31,11 +31,27 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
+		"event_trgr_properties_tumbling_pipeline1_parameters_folderpath": {
+			"type": "string",
+			"defaultValue": "@trigggerBody().filePath"
+		},
+		"event_trgr_properties_tumbling_pipeline1_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"event_trgr_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
+		"evtn_based_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_folderpath": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowstarttime"
 		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
+		"tumb_trigger_pl2_properties_pipeline_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndtime"
 		},
@@ -46,18 +62,6 @@
 		"tumblinggg_properties_pipeline_parameters_pstartdate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowstarttime"
-		},
-		"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
-			"type": "string",
-			"defaultValue": "@triggger().outputs.windowstarttime"
-		},
-		"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
-			"type": "string",
-			"defaultValue": "@triggger().outputs.windowEndtime"
-		},
-		"evtn_based_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
 		}
 	},
 	"variables": {
@@ -273,14 +277,6 @@
 								"storeSettings": {
 									"type": "AzureBlobFSReadSettings",
 									"recursive": true,
-									"modifiedDatetimeStart": {
-										"value": "@pipeline().parameters.starttime",
-										"type": "Expression"
-									},
-									"modifiedDatetimeEnd": {
-										"value": "@pipeline().parameters.endtime",
-										"type": "Expression"
-									},
 									"wildcardFileName": "*.csv",
 									"enablePartitionDiscovery": false
 								},
@@ -328,10 +324,10 @@
 					"elapsedTimeMetric": {}
 				},
 				"parameters": {
-					"starttime": {
+					"folderpath": {
 						"type": "string"
 					},
-					"endtime": {
+					"filename": {
 						"type": "string"
 					}
 				},
@@ -437,6 +433,71 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/event_trgr')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "tumbling_pipeline1",
+							"type": "PipelineReference"
+						},
+						"parameters": {
+							"folderpath": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_folderpath')]",
+							"filename": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_filename')]"
+						}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/sampledatasets/blobs/",
+					"blobPathEndsWith": ".csv",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('event_trgr_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated",
+						"Microsoft.Storage.BlobDeleted"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/evtn_based')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "tumbling_pipeline1",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "BlobEventsTrigger",
+				"typeProperties": {
+					"blobPathBeginsWith": "/sampledatasets/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('evtn_based_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/scheduled')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -480,8 +541,8 @@
 						"type": "PipelineReference"
 					},
 					"parameters": {
-						"starttime": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_starttime')]",
-						"endtime": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_endtime')]"
+						"folderpath": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_folderpath')]",
+						"filename": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_filename')]"
 					}
 				},
 				"type": "TumblingWindowTrigger",
@@ -571,39 +632,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/tumblings_pipeline2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/evtn_based')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Stopped",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "tumbling_pipeline1",
-							"type": "PipelineReference"
-						},
-						"parameters": {
-							"starttime": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_starttime')]",
-							"endtime": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_endtime')]"
-						}
-					}
-				],
-				"type": "BlobEventsTrigger",
-				"typeProperties": {
-					"blobPathBeginsWith": "/sampledatasets/blobs/",
-					"ignoreEmptyBlobs": true,
-					"scope": "[parameters('evtn_based_properties_typeProperties_scope')]",
-					"events": [
-						"Microsoft.Storage.BlobCreated"
-					]
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/tumbling_pipeline1')]"
 			]
 		}
 	]

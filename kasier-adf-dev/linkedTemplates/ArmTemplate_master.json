@@ -31,11 +31,27 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
+		"event_trgr_properties_tumbling_pipeline1_parameters_folderpath": {
+			"type": "string",
+			"defaultValue": "@trigggerBody().filePath"
+		},
+		"event_trgr_properties_tumbling_pipeline1_parameters_filename": {
+			"type": "string",
+			"defaultValue": "@triggerBody().fileName"
+		},
+		"event_trgr_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
+		"evtn_based_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
+		},
+		"tumb_trigger_pl2_properties_pipeline_parameters_folderpath": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowstarttime"
 		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
+		"tumb_trigger_pl2_properties_pipeline_parameters_filename": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndtime"
 		},
@@ -46,18 +62,6 @@
 		"tumblinggg_properties_pipeline_parameters_pstartdate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowstarttime"
-		},
-		"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
-			"type": "string",
-			"defaultValue": "@triggger().outputs.windowstarttime"
-		},
-		"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
-			"type": "string",
-			"defaultValue": "@triggger().outputs.windowEndtime"
-		},
-		"evtn_based_properties_typeProperties_scope": {
-			"type": "string",
-			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
 		},
 		"containerUri": {
 			"type": "string",
@@ -104,26 +108,29 @@
 					"adf_learning_youtube_ls_properties_typeProperties_url": {
 						"value": "[parameters('adf_learning_youtube_ls_properties_typeProperties_url')]"
 					},
-					"tumb_trigger_pl2_properties_pipeline_parameters_starttime": {
-						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_starttime')]"
+					"event_trgr_properties_tumbling_pipeline1_parameters_folderpath": {
+						"value": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_folderpath')]"
 					},
-					"tumb_trigger_pl2_properties_pipeline_parameters_endtime": {
-						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_endtime')]"
+					"event_trgr_properties_tumbling_pipeline1_parameters_filename": {
+						"value": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_filename')]"
+					},
+					"event_trgr_properties_typeProperties_scope": {
+						"value": "[parameters('event_trgr_properties_typeProperties_scope')]"
+					},
+					"evtn_based_properties_typeProperties_scope": {
+						"value": "[parameters('evtn_based_properties_typeProperties_scope')]"
+					},
+					"tumb_trigger_pl2_properties_pipeline_parameters_folderpath": {
+						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_folderpath')]"
+					},
+					"tumb_trigger_pl2_properties_pipeline_parameters_filename": {
+						"value": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_filename')]"
 					},
 					"tumblinggg_properties_pipeline_parameters_pendate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pendate')]"
 					},
 					"tumblinggg_properties_pipeline_parameters_pstartdate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pstartdate')]"
-					},
-					"evtn_based_properties_tumbling_pipeline1_parameters_starttime": {
-						"value": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_starttime')]"
-					},
-					"evtn_based_properties_tumbling_pipeline1_parameters_endtime": {
-						"value": "[parameters('evtn_based_properties_tumbling_pipeline1_parameters_endtime')]"
-					},
-					"evtn_based_properties_typeProperties_scope": {
-						"value": "[parameters('evtn_based_properties_typeProperties_scope')]"
 					}
 				}
 			},
