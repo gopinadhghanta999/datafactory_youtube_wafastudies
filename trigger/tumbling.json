@@ -5,7 +5,7 @@
 		"runtimeState": "Stopped",
 		"pipeline": {
 			"pipelineReference": {
-				"referenceName": "pipeline1",
+				"referenceName": "tumbling_pipeline1",
 				"type": "PipelineReference"
 			}
 		},
