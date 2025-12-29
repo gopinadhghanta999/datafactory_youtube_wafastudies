@@ -5,8 +5,20 @@
 		"factoryName": {
 			"value": "kasier-adf-dev"
 		},
+		"AzureSqlDatabase1_password": {
+			"value": ""
+		},
 		"AzureKeyVault_ls_properties_typeProperties_baseUrl": {
 			"value": "https://kaiser-healthcare-kv.vault.azure.net/"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "practicesserver.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "practice_db"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_userName": {
+			"value": "ayyappa"
 		},
 		"adf_learning_youtube_ls_properties_typeProperties_url": {
 			"value": "https://kaiseradlsdev.dfs.core.windows.net"
