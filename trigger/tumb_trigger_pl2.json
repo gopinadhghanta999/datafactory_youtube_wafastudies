@@ -7,6 +7,10 @@
 			"pipelineReference": {
 				"referenceName": "tumbling_pipeline1",
 				"type": "PipelineReference"
+			},
+			"parameters": {
+				"starttime": "@trigger().outputs.windowstarttime",
+				"endtime": "@trigger().outputs.windowEndtime"
 			}
 		},
 		"type": "TumblingWindowTrigger",

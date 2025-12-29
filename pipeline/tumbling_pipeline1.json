@@ -61,6 +61,14 @@
 				]
 			}
 		],
+		"parameters": {
+			"starttime": {
+				"type": "string"
+			},
+			"endtime": {
+				"type": "string"
+			}
+		},
 		"annotations": []
 	}
 }
