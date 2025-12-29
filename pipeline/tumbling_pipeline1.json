@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "tumbling_pipeline1",
 	"properties": {
 		"activities": [
 			{
