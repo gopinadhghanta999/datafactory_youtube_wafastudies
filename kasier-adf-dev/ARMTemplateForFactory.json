@@ -31,14 +31,6 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net"
 		},
-		"event_trgr_properties_tumbling_pipeline1_parameters_folderpath": {
-			"type": "string",
-			"defaultValue": "@trigggerBody().filePath"
-		},
-		"event_trgr_properties_tumbling_pipeline1_parameters_filename": {
-			"type": "string",
-			"defaultValue": "@triggerBody().fileName"
-		},
 		"event_trgr_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
@@ -46,14 +38,6 @@
 		"evtn_based_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
-		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_folderpath": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowstarttime"
-		},
-		"tumb_trigger_pl2_properties_pipeline_parameters_filename": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndtime"
 		},
 		"tumblinggg_properties_pipeline_parameters_pendate": {
 			"type": "string",
@@ -137,14 +121,6 @@
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
-				},
-				"parameters": {
-					"folderpath": {
-						"type": "string"
-					},
-					"filename": {
-						"type": "string"
-					}
 				},
 				"annotations": []
 			},
@@ -445,10 +421,7 @@
 							"referenceName": "tumbling_pipeline1",
 							"type": "PipelineReference"
 						},
-						"parameters": {
-							"folderpath": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_folderpath')]",
-							"filename": "[parameters('event_trgr_properties_tumbling_pipeline1_parameters_filename')]"
-						}
+						"parameters": {}
 					}
 				],
 				"type": "BlobEventsTrigger",
@@ -540,10 +513,7 @@
 						"referenceName": "tumbling_pipeline1",
 						"type": "PipelineReference"
 					},
-					"parameters": {
-						"folderpath": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_folderpath')]",
-						"filename": "[parameters('tumb_trigger_pl2_properties_pipeline_parameters_filename')]"
-					}
+					"parameters": {}
 				},
 				"type": "TumblingWindowTrigger",
 				"typeProperties": {
