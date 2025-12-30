@@ -74,21 +74,13 @@
 					},
 					"ifFalseActivities": [
 						{
-							"name": "Send email",
-							"type": "WebActivity",
+							"name": "Activity failed",
+							"type": "Fail",
 							"dependsOn": [],
-							"policy": {
-								"timeout": "0.12:00:00",
-								"retry": 0,
-								"retryIntervalInSeconds": 30,
-								"secureOutput": false,
-								"secureInput": false
-							},
 							"userProperties": [],
 							"typeProperties": {
-								"method": "POST",
-								"url": "https://hideline",
-								"body": "Dummy body"
+								"message": "the pipeline got failed",
+								"errorCode": "500"
 							}
 						}
 					],
