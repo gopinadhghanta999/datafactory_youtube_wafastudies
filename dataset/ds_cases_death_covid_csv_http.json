@@ -1,0 +1,22 @@
+{
+	"name": "ds_cases_death_covid_csv_http",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "http_population_covid_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": "nytimes/covid-19-data/blob/master/excess-deaths/deaths.csv"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
