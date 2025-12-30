@@ -1,10 +1,6 @@
 {
 	"name": "Parquet1",
 	"properties": {
-		"linkedServiceName": {
-			"referenceName": "adf_learning_youtube_ls",
-			"type": "LinkedServiceReference"
-		},
 		"annotations": [],
 		"type": "Parquet",
 		"typeProperties": {
