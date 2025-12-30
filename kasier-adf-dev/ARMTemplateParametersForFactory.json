@@ -8,6 +8,12 @@
 		"AzureSqlDatabase1_password": {
 			"value": ""
 		},
+		"adls_kasiercovid_ls_accountKey": {
+			"value": ""
+		},
+		"blob_storagecovidudemy_ls_connectionString": {
+			"value": ""
+		},
 		"AzureKeyVault_ls_properties_typeProperties_baseUrl": {
 			"value": "https://kaiser-healthcare-kv.vault.azure.net/"
 		},
@@ -20,8 +26,8 @@
 		"AzureSqlDatabase1_properties_typeProperties_userName": {
 			"value": "ayyappa"
 		},
-		"adf_learning_youtube_ls_properties_typeProperties_url": {
-			"value": "https://kaiseradlsdev.dfs.core.windows.net"
+		"adls_kasiercovid_ls_properties_typeProperties_url": {
+			"value": "https://kaiseradlsdev.dfs.core.windows.net/"
 		},
 		"event_trgr_properties_typeProperties_scope": {
 			"value": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
