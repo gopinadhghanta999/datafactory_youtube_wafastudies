@@ -69,9 +69,29 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@equals(activity('Get Metadata1').output.columnCount,13)",
+						"value": "@equals(activity('Get Metadata1').output.columnCount,14)",
 						"type": "Expression"
 					},
+					"ifFalseActivities": [
+						{
+							"name": "Send email",
+							"type": "WebActivity",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"method": "POST",
+								"url": "https://hideline",
+								"body": "Dummy body"
+							}
+						}
+					],
 					"ifTrueActivities": [
 						{
 							"name": "copy population_data",
