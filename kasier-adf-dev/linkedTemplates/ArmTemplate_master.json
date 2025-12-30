@@ -39,6 +39,10 @@
 			"type": "string",
 			"defaultValue": "https://kaiseradlsdev.dfs.core.windows.net/"
 		},
+		"http_population_covid_ls_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://github.com"
+		},
 		"event_trgr_properties_typeProperties_scope": {
 			"type": "string",
 			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
@@ -110,6 +114,9 @@
 					"adls_kasiercovid_ls_properties_typeProperties_url": {
 						"value": "[parameters('adls_kasiercovid_ls_properties_typeProperties_url')]"
 					},
+					"http_population_covid_ls_properties_typeProperties_url": {
+						"value": "[parameters('http_population_covid_ls_properties_typeProperties_url')]"
+					},
 					"event_trgr_properties_typeProperties_scope": {
 						"value": "[parameters('event_trgr_properties_typeProperties_scope')]"
 					},
@@ -118,6 +125,24 @@
 					},
 					"population_ingestion_trgr_properties_typeProperties_scope": {
 						"value": "[parameters('population_ingestion_trgr_properties_typeProperties_scope')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "kasier-adf-dev_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
 					},
 					"tumblinggg_properties_pipeline_parameters_pendate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pendate')]"
@@ -127,7 +152,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'kasier-adf-dev_ArmTemplate_0')]"
+			]
 		}
 	]
 }

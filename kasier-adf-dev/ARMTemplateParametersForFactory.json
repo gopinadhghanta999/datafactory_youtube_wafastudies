@@ -29,6 +29,9 @@
 		"adls_kasiercovid_ls_properties_typeProperties_url": {
 			"value": "https://kaiseradlsdev.dfs.core.windows.net/"
 		},
+		"http_population_covid_ls_properties_typeProperties_url": {
+			"value": "https://github.com"
+		},
 		"event_trgr_properties_typeProperties_scope": {
 			"value": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
 		},
