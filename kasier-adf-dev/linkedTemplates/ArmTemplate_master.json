@@ -47,6 +47,10 @@
 			"type": "string",
 			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/kaiseradlsdev"
 		},
+		"population_ingestion_trgr_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/storagecovidudemy"
+		},
 		"tumblinggg_properties_pipeline_parameters_pendate": {
 			"type": "string",
 			"defaultValue": "@trigger().outputs.windowEndtime"
@@ -111,6 +115,9 @@
 					},
 					"evtn_based_properties_typeProperties_scope": {
 						"value": "[parameters('evtn_based_properties_typeProperties_scope')]"
+					},
+					"population_ingestion_trgr_properties_typeProperties_scope": {
+						"value": "[parameters('population_ingestion_trgr_properties_typeProperties_scope')]"
 					},
 					"tumblinggg_properties_pipeline_parameters_pendate": {
 						"value": "[parameters('tumblinggg_properties_pipeline_parameters_pendate')]"
