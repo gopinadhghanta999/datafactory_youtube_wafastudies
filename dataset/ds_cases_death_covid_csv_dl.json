@@ -1,0 +1,24 @@
+{
+	"name": "ds_cases_death_covid_csv_dl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "adls_kasiercovid_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "cases_death.csv",
+				"folderPath": "ecdc",
+				"fileSystem": "covid-raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
