@@ -30,7 +30,7 @@
 						"referenceName": "ds_ecdc_filelist_adls",
 						"type": "DatasetReference"
 					},
-					"firstRowOnly": true
+					"firstRowOnly": false
 				}
 			}
 		],
