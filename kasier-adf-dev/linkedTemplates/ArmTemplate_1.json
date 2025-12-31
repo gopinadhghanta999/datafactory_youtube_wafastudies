@@ -7,13 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "kasier-adf-dev"
 		},
-		"tumblinggg_properties_pipeline_parameters_pendate": {
+		"population_ingestion_trgr_properties_typeProperties_scope": {
 			"type": "string",
-			"defaultValue": "@trigger().outputs.windowEndtime"
-		},
-		"tumblinggg_properties_pipeline_parameters_pstartdate": {
-			"type": "string",
-			"defaultValue": "@trigger().outputs.windowstarttime"
+			"defaultValue": "/subscriptions/4c8088ef-4038-45a0-b326-85e0498c75ab/resourceGroups/kasier_dev/providers/Microsoft.Storage/storageAccounts/storagecovidudemy"
 		}
 	},
 	"variables": {
@@ -21,34 +17,29 @@
 	},
 	"resources": [
 		{
-			"name": "[concat(parameters('factoryName'), '/tumblinggg')]",
+			"name": "[concat(parameters('factoryName'), '/population_ingestion_trgr')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"annotations": [],
 				"runtimeState": "Stopped",
-				"pipeline": {
-					"pipelineReference": {
-						"referenceName": "tumblings_pipeline2",
-						"type": "PipelineReference"
-					},
-					"parameters": {
-						"pendate": "[parameters('tumblinggg_properties_pipeline_parameters_pendate')]",
-						"pstartdate": "[parameters('tumblinggg_properties_pipeline_parameters_pstartdate')]"
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "population_ingestion_data_pl",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
 					}
-				},
-				"type": "TumblingWindowTrigger",
+				],
+				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"frequency": "Hour",
-					"interval": 24,
-					"startTime": "2024-03-01T00:00:00Z",
-					"endTime": "2024-03-06T05:00:00Z",
-					"delay": "00:00:00",
-					"maxConcurrency": 50,
-					"retryPolicy": {
-						"intervalInSeconds": 30
-					},
-					"dependsOn": []
+					"blobPathBeginsWith": "/population/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('population_ingestion_trgr_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
 				}
 			},
 			"dependsOn": []
