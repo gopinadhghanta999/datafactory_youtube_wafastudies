@@ -60,6 +60,16 @@
 				]
 			}
 		],
+		"variables": {
+			"filename": {
+				"type": "String",
+				"defaultValue": "nytimes/covid-19-data/blob/master/colleges/colleges.csv"
+			},
+			"relative_url": {
+				"type": "String",
+				"defaultValue": "colleges.csv"
+			}
+		},
 		"annotations": []
 	}
 }
