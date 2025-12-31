@@ -1,0 +1,17 @@
+{
+	"name": "ecdc_load_sc_trgr",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2025-12-31T06:02:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}
