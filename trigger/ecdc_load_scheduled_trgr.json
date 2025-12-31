@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "ingest_ecdc_raw_pl",
+					"referenceName": "02_ecdc_raw_filesload_adls_pl",
 					"type": "PipelineReference"
 				}
 			}

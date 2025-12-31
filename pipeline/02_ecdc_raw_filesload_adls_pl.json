@@ -1,5 +1,5 @@
 {
-	"name": "ingest_ecdc_raw_pl",
+	"name": "02_ecdc_raw_filesload_adls_pl",
 	"properties": {
 		"activities": [
 			{

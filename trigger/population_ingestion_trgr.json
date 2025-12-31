@@ -6,7 +6,7 @@
 		"pipelines": [
 			{
 				"pipelineReference": {
-					"referenceName": "population_ingestion_data_pl",
+					"referenceName": "01_population_ingestion_adls_pl",
 					"type": "PipelineReference"
 				}
 			}
