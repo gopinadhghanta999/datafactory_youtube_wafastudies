@@ -1,0 +1,29 @@
+{
+	"name": "ds_ecdc_filelist_adls",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blob_storagecovidudemy_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ecdc_filelist.json",
+				"container": "configs"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"sourceurl": {
+					"type": "string"
+				},
+				"sinkfilename": {
+					"type": "string"
+				}
+			}
+		}
+	}
+}
