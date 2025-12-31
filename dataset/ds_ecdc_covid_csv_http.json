@@ -1,5 +1,5 @@
 {
-	"name": "ds_cases_death_covid_csv_http",
+	"name": "ds_ecdc_covid_csv_http",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "http_population_covid_ls",

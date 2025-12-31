@@ -1,5 +1,5 @@
 {
-	"name": "ds_cases_death_covid_csv_dl",
+	"name": "ds_ecdc_covid_csv_dl",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "adls_kasiercovid_ls",
