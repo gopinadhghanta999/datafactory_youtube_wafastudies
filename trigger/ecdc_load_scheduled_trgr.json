@@ -1,5 +1,5 @@
 {
-	"name": "ecdc_load_sc_trgr",
+	"name": "ecdc_load_scheduled_trgr",
 	"properties": {
 		"annotations": [],
 		"runtimeState": "Started",
