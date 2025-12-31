@@ -54,6 +54,10 @@
 							"realtive_url": {
 								"value": "@pipeline().parameters.relative_url",
 								"type": "Expression"
+							},
+							"base_url": {
+								"value": "@pipeline().parameters.soruce_base_url_plpr",
+								"type": "Expression"
 							}
 						}
 					}
@@ -77,6 +81,9 @@
 				"type": "string"
 			},
 			"relative_url": {
+				"type": "string"
+			},
+			"soruce_base_url_plpr": {
 				"type": "string"
 			}
 		},
