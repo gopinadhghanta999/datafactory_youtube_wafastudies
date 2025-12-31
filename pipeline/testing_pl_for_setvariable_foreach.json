@@ -1,5 +1,5 @@
 {
-	"name": "pipeline1",
+	"name": "testing_pl_for_setvariable_foreach",
 	"properties": {
 		"activities": [
 			{
