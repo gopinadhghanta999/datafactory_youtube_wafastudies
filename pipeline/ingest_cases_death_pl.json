@@ -75,11 +75,11 @@
 		"variables": {
 			"filename": {
 				"type": "String",
-				"defaultValue": "nytimes/covid-19-data/blob/master/colleges/colleges.csv"
+				"defaultValue": "colleges.csv"
 			},
 			"relative_url": {
 				"type": "String",
-				"defaultValue": "colleges.csv"
+				"defaultValue": "nytimes/covid-19-data/blob/master/colleges/colleges.csv"
 			}
 		},
 		"annotations": []
