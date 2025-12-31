@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Copy ecdc data",
-				"type": "Copy",
+				"name": "Lookup ecdc file list",
+				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -16,77 +16,119 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "DelimitedTextSource",
+						"type": "JsonSource",
 						"storeSettings": {
-							"type": "HttpReadSettings",
-							"requestMethod": "GET"
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "DelimitedTextReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
-					"sink": {
-						"type": "DelimitedTextSink",
-						"storeSettings": {
-							"type": "AzureBlobFSWriteSettings"
-						},
-						"formatSettings": {
-							"type": "DelimitedTextWriteSettings",
-							"quoteAllText": true,
-							"fileExtension": ".txt"
-						}
+					"dataset": {
+						"referenceName": "ds_ecdc_filelist_adls",
+						"type": "DatasetReference"
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "Execute copy for each record",
+				"type": "ForEach",
+				"dependsOn": [
 					{
-						"referenceName": "ds_ecdc_covid_csv_http",
-						"type": "DatasetReference",
-						"parameters": {
-							"realtive_url": {
-								"value": "@pipeline().parameters.relative_url",
-								"type": "Expression"
-							},
-							"base_url": {
-								"value": "@pipeline().parameters.soruce_base_url_plpr",
-								"type": "Expression"
-							}
-						}
+						"activity": "Lookup ecdc file list",
+						"dependencyConditions": [
+							"Succeeded"
+						]
 					}
 				],
-				"outputs": [
-					{
-						"referenceName": "ds_ecdc_covid_csv_dl",
-						"type": "DatasetReference",
-						"parameters": {
-							"filename": {
-								"value": "@pipeline().parameters.filename",
-								"type": "Expression"
-							}
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Lookup ecdc file list').output.value",
+						"type": "Expression"
+					},
+					"isSequential": false,
+					"activities": [
+						{
+							"name": "Copy ecdc data",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "DelimitedTextSource",
+									"storeSettings": {
+										"type": "HttpReadSettings",
+										"requestMethod": "GET"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextReadSettings"
+									}
+								},
+								"sink": {
+									"type": "DelimitedTextSink",
+									"storeSettings": {
+										"type": "AzureBlobFSWriteSettings"
+									},
+									"formatSettings": {
+										"type": "DelimitedTextWriteSettings",
+										"quoteAllText": true,
+										"fileExtension": ".txt"
+									}
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "ds_ecdc_covid_csv_http",
+									"type": "DatasetReference",
+									"parameters": {
+										"realtive_url": {
+											"value": "@item().source_relativeurl",
+											"type": "Expression"
+										},
+										"base_url": {
+											"value": "@item().source_baseurl",
+											"type": "Expression"
+										}
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "ds_ecdc_covid_csv_dl",
+									"type": "DatasetReference",
+									"parameters": {
+										"filename": {
+											"value": "@item().sinkfilename",
+											"type": "Expression"
+										}
+									}
+								}
+							]
 						}
-					}
-				]
+					]
+				}
 			}
 		],
-		"parameters": {
-			"filename": {
-				"type": "string"
-			},
-			"relative_url": {
-				"type": "string"
-			},
-			"soruce_base_url_plpr": {
-				"type": "string"
-			}
-		},
 		"annotations": []
 	}
 }
